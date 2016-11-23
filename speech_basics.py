@@ -4,7 +4,7 @@
 #/*                                                                       */
 #/*                  Language Technologies Institute                      */
 #/*                     Carnegie Mellon University                        */
-#/*                        Copyright (c) 2006                             */
+#/*                        Copyright (c) 2016                             */
 #/*                        All Rights Reserved.                           */
 #/*                                                                       */
 #/*  Permission is hereby granted, free of charge, to use and distribute  */
