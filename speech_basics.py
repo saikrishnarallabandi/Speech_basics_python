@@ -182,17 +182,17 @@ class MCEP:
         melwidth = (higher_mel - lower_mel)/(self.number_filterbanks + 1)
 
         mel_filters = []
-        for i in range(0,self.number_filterbanks + 2):                   # generating filter banks in mel frequency domain
-            mel_filters.append(lower_mel + (i * melwidth)) #all the centers of mel filters are equally spaced
+        for i in range(0,self.number_filterbanks + 2):                  
+            mel_filters.append(lower_mel + (i * melwidth))
         mel_filters = numpy.array(mel_filters)
 
-        linear_filters = self.__melinv(mel_filters) #filters mapped to linear frequency range
-        filter_banks = (linear_filters * self.N)/self.fs #discretizing the frequency range
+        linear_filters = self.__melinv(mel_filters) 
+        filter_banks = (linear_filters * self.N)/self.fs 
 
-        self.LON = filter_banks[0]   #min and max N values are stored to compute the energy
-        self.HIN = filter_banks[-1]  # of the signal
+        self.LON = filter_banks[0]   
+        self.HIN = filter_banks[-1]  
         
-        self.H = numpy.array([[0.0] * self.N for i in xrange(self.number_filterbanks + 2)]) # for easy computation we have used NOFB + 2
+        self.H = numpy.array([[0.0] * self.N for i in xrange(self.number_filterbanks + 2)]) 
 
         for i in range(1,self.number_filterbanks + 1):
             for k in range(0,self.N):
@@ -205,7 +205,6 @@ class MCEP:
                 else:
                     self.H[i][k] = 0
 
-        #Note: The first column of the transfer function H are all zeros
 
     def melspec(self,sig):
         '''
@@ -215,6 +214,7 @@ class MCEP:
                                N - 1
                        X[i] = SUMMATION |S(k)| * H[i][k]
                                  k=0
+
         where H is weighting function.
         Input Parameters:
         sig : windowed speech signal
@@ -231,7 +231,7 @@ class MCEP:
         window_shift_frames = (window_shift * self.fs)/1000
         
         sig = numpy.append(sig[0],numpy.diff(sig)) #to remove dc
-        sig = sig + 0.001 #making sure that there are no zeros in the signal
+        sig = sig + 0.001 
         noFrames = int((len(sig) - window_length_frames)/window_shift_frames) + 1
         
         mspec = []
